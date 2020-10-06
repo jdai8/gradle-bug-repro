@@ -43,5 +43,7 @@ configurations.runtimeClasspath {
 }
 
 task printRuntimeClasspath {
-    configurations.runtimeClasspath.each { println(it) }
+    doLast {
+        configurations.runtimeClasspath.each { println(it) }
+    }
 }
