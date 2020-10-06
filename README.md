@@ -2,21 +2,15 @@ This project reproduces a Gradle bug.
 
 ```
 $ ./gradlew :p1:shadowJar
-
-> Configure project :p1
 Selecting project :shared(onePrefRuntimeElements) from [project :shared(onePrefRuntimeElements), project :shared(oneRuntimeElements)]
 Selecting project :shared(twoPrefRuntimeElements) from [project :shared(twoPrefRuntimeElements), project :shared(twoRuntimeElements)]
-/Users/jack_dai/gradle-repro/p2/build/libs/p2.jar
-/Users/jack_dai/gradle-repro/shared/build/libs/shared-one-preferred.jar
-/Users/jack_dai/gradle-repro/shared/build/libs/shared-two-preferred.jar
-/Users/jack_dai/gradle-repro/shared/build/libs/shared-one.jar
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
 Could not determine the dependencies of task ':p1:shadowJar'.
 > Could not resolve all dependencies for configuration ':p1:runtimeClasspath'.
-   > Problems reading data from Binary store in /private/var/folders/wc/1z_z159n7nxf31gbbnmldcmc0000gn/T/gradle871452152608880068.bin offset 203 exists? true
+   > Problems reading data from Binary store in /private/var/folders/wc/1z_z159n7nxf31gbbnmldcmc0000gn/T/gradle589409329810110249.bin offset 203 exists? true
 ```
 
 ## Setup
