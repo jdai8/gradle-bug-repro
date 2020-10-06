@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.0.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+dependencies {
+    compile project(':p2')
+    compile(project(':shared')) {
+        capabilities {
+            requireCapability('g:one-preferred:v')
+        }
+    }
+    compile(project(':shared')) {
+        capabilities {
+            requireCapability('g:two-preferred:v')
+        }
+    }
+}
+
+configurations.compileClasspath {
+    resolutionStrategy.capabilitiesResolution.all { details ->
+        def selection =
+            details.candidates.find { it.variantName.endsWith('PrefApiElements') }
+        println("Selecting $selection from ${details.candidates}")
+        details.select(selection)
+    }
+}
+
+configurations.runtimeClasspath {
+    resolutionStrategy.capabilitiesResolution.all { details ->
+        def selection =
+            details.candidates.find { it.variantName.endsWith('PrefRuntimeElements') }
+        println("Selecting $selection from ${details.candidates}")
+        details.select(selection)
+    }
+}
+
+task printRuntimeClasspath {
+    configurations.runtimeClasspath.each { println(it) }
+}

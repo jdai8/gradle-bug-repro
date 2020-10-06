@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+}
+
+sourceSets {
+    one {}
+    onePref {}
+    two {}
+    twoPref {}
+}
+
+java {
+    registerFeature('one') {
+        usingSourceSet(sourceSets.one)
+        capability('o', 'n', 'e')
+        capability('g', 'one', 'v')
+    }
+    registerFeature('onePreferred') {
+        usingSourceSet(sourceSets.onePref)
+        capability('o', 'n', 'e')
+        capability('g', 'one-preferred', 'v')
+    }
+
+    registerFeature('two') {
+        usingSourceSet(sourceSets.two)
+        capability('t', 'w', 'o')
+        capability('g', 'two', 'v')
+    }
+    registerFeature('twoPreferred') {
+        usingSourceSet(sourceSets.twoPref)
+        capability('t', 'w', 'o')
+        capability('g', 'two-preferred', 'v')
+    }
+}
+
+dependencies {
+    // the direction matters, if the dependency is one->two instead of two->one it works:
+    // oneCompile(project(':shared')) {
+    //     capabilities {
+    //         requireCapability('g:two:v')
+    //     }
+    // }
+    // onePrefCompile(project(':shared')) {
+    //     capabilities {
+    //         requireCapability('g:two-preferred:v')
+    //     }
+    // }
+
+    twoCompile(project(':shared')) {
+        capabilities {
+            requireCapability('g:one:v')
+        }
+    }
+    twoPrefCompile(project(':shared')) {
+        capabilities {
+            requireCapability('g:one-preferred:v')
+        }
+    }
+}

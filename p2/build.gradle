@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+dependencies {
+    compile(project(':shared')) {
+        capabilities {
+            requireCapability('g:one:v')
+        }
+    }
+    compile(project(':shared')) {
+        capabilities {
+            requireCapability('g:two:v')
+        }
+    }
+}
