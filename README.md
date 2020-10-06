@@ -23,7 +23,7 @@ Could not determine the dependencies of task ':p1:shadowJar'.
 - `shared` exposes four variants: `{one,two}{,Pref}`.
 - `one` and `onePref` share a common capability `o:n:e`. `two` and `twoPref` share `t:w:o`.
 - Each variant also has its own unique capability that looks like `g:one-preferred:v`.
-- `twoPref` depends on `onePref`, and `two` depends on `one`. **This repro is dependent on the direction of this dependency**
+- `twoPref` depends on `onePref`, and `two` depends on `one`. **This repro is dependent on the direction/order of this dependency**
 - `p1` consumes the two "preferred" capabilities: `{one,two}Pref`.
 - `p2` consumes the two "non-preferred" capabilities: `{one,two}`.
 - `p1` also has a dependency on `p2`.
